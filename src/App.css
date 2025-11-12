@@ -1,0 +1,10 @@
+.weather{
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 900px) {
+    .weather{
+        flex-direction: column;
+    }
+}

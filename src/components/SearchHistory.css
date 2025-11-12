@@ -1,0 +1,77 @@
+.history-card {
+  width: 90%;
+  max-width: 900px;
+  margin: 25px auto;
+  background: linear-gradient(145deg, #89f7fe, #66a6ff);
+  color: white;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.history-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.empty {
+  text-align: center;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+/* List container */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Each previous search row */
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(33, 196, 208, 0.15);
+  padding: 10px 15px;
+  border-radius: 15px;
+  transition: background 0.3s ease;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Left: location + weather */
+.history-item .left h3 {
+  font-size: 1rem;
+  margin-bottom: 3px;
+}
+
+.history-item .weather {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Right: temperature */
+.history-item .right .temp {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .history-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+  }
+}
