@@ -1,16 +1,15 @@
 import CurrentWeather from "./components/CurrentWeather";
-import Navbar  from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import SearchedWeather from "./components/SearchedWeather"
 import './App.css'
 import SearchHistory from "./components/SearchHistory";
-import { useState,useEffect } from "react";
-function App () {
+import { useState, useEffect } from "react";
+function App() {
   const [search, setSearch] = useState("");
-  const [btnState,setBtnState] = useState(false);
+  const [btnState, setBtnState] = useState(false);
   const [history, setHistory] = useState([]);
   const [loaded, setLoaded] = useState(false); // 👈 flag to prevent early save
-
- // Load from localStorage once
+  // Load from localStorage once
   useEffect(() => {
     const saved = localStorage.getItem("weatherHistory");
     if (saved) {
@@ -30,24 +29,30 @@ function App () {
     }
   }, [history, loaded]);
 
-    // 📜 Function to update history
+  // 📜 Function to update history
   const updateHistory = (location, weather, temperature) => {
-    setHistory([...history,{
-      location: location,
-      weather: weather,
-      temperature: temperature
+    const newEntry = { location, weather, temperature };
 
-    }])
+    setHistory(prev => {
+      let updated = [newEntry, ...prev];  // newest first
+
+      if (updated.length > 5) {
+        updated = updated.slice(0, 5);   // keep max 5
+      }
+
+      return updated;
+    });
   };
+
 
   return (
     <div>
-      <Navbar search={search} setSearch={setSearch} btnState={btnState} setBtnState={setBtnState}/>
+      <Navbar search={search} setSearch={setSearch} btnState={btnState} setBtnState={setBtnState} />
       <div className="weather">
         <CurrentWeather />
-        <SearchedWeather search={search} setSearch = {setSearch} btnState={btnState} setBtnState={setBtnState} updateHistory={updateHistory}/>
+        <SearchedWeather search={search} setSearch={setSearch} btnState={btnState} setBtnState={setBtnState} updateHistory={updateHistory} history={history} />
       </div>
-      <SearchHistory history = {history} />
+      <SearchHistory history={history} />
     </div>
   );
 }

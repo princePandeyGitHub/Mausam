@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { fetchWeather,fetchAqi }from '../utils/FetchWeather.js'
 import './CurrentWeather.css';
 
-function SearchedWeather({search, btnState, setBtnState, setSearch, updateHistory}) {
+
+function SearchedWeather({search, btnState, setBtnState, setSearch, updateHistory, history}) {
   const [weatherData, setWeatherData] = useState(null);
   const [aqiData, setAqiData] = useState(null)
   const city = search;
@@ -37,9 +38,9 @@ function SearchedWeather({search, btnState, setBtnState, setSearch, updateHistor
     return <div>Loading...</div>;
   }
 
-  const location = weatherData.name;
-  const temperature = weatherData.main?.temp;
-  const description = weatherData.weather?.[0]?.description;
+  const location = weatherData.name || "UnKnown";
+  const temperature = weatherData.main?.temp || "_____";
+  const description = weatherData.weather?.[0]?.description || "_____";
 
   const icon = weatherData.weather?.[0]?.icon
     ? `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
@@ -53,7 +54,7 @@ function SearchedWeather({search, btnState, setBtnState, setSearch, updateHistor
     <div className="weather-card">
       {/* Top: Location */}
       <div className="location">
-        <h2>{location || "Unknown Location"}</h2>
+        <h2>{location}</h2>
       </div>
 
       {/* Middle: Temperature + Weather */}
@@ -63,7 +64,7 @@ function SearchedWeather({search, btnState, setBtnState, setSearch, updateHistor
         </div>
         <div className="weather">
           <img src={icon} alt="weather icon" />
-          <p>{description || "Clear Sky"}</p>
+          <p>{description}</p>
         </div>
       </div>
 
