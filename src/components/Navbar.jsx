@@ -38,7 +38,7 @@ const handleSearch = () => {
           src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
           alt="logo"
         />
-        <h1>Weather Channel</h1>
+        <h1>Mausam</h1>
       </div>
 
       <div className="search-bar">
